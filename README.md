@@ -1,0 +1,1 @@
+Following "OpenGL for Beginners" tutorial from https://ogldev.org/. 
