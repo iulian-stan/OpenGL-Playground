@@ -11,3 +11,4 @@ add_subdirectory(deps)
 
 # Adding tutorials
 add_subdirectory(ex_01)
+add_subdirectory(ex_02)

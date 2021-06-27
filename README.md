@@ -4,6 +4,8 @@ Each exercise is added on a separate branch.
 
 ```
 ├─ deps/         Global dependencies
-│   └─ freeglut/ Open-source alternative to the OpenGL Utility Toolkit [FreeGLUT](http://freeglut.sourceforge.net/)
-└─ ex_01/        Creating OpenGL Window using FreeGLUT
+│   ├─ freeglut/ Open-source alternative to the OpenGL Utility Toolkit [FreeGLUT](http://freeglut.sourceforge.net/)
+│   └─ glew/     OpenGL Extension Wrangler Library [GLEW](http://glew.sourceforge.net/)
+├─ ex_01/        Creating OpenGL Window using FreeGLUT
+└─ ex_02/        Drawing a dot
 ```
