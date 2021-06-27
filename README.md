@@ -8,5 +8,6 @@ Each exercise is added on a separate branch.
 │   └─ glew/     OpenGL Extension Wrangler Library [GLEW](http://glew.sourceforge.net/)
 ├─ ex_01/        Creating OpenGL Window using FreeGLUT
 ├─ ex_02/        Drawing a dot
-└─ ex_03/        Drawing a triangle
+├─ ex_03/        Drawing a triangle
+└─ ex_04/        Drawing a rectangle
 ```
