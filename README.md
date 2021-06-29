@@ -10,5 +10,6 @@ Each exercise is added on a separate branch.
 ├─ ex_02/        Drawing a dot
 ├─ ex_03/        Drawing a triangle
 ├─ ex_04/        Drawing a rectangle
-└─ ex_04.5/      Face Culling
+├─ ex_04.5/      Face Culling
+└─ ex_05/        OpenGL Shading Language (GLSL)
 ```
