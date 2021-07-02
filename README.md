@@ -13,5 +13,6 @@ Each exercise is added on a separate branch.
 ├─ ex_04.5/      Face Culling
 ├─ ex_05/        OpenGL Shading Language (GLSL)
 ├─ ex_05.5/      Color interpolation
-└─ ex_06/        Texture
+├─ ex_06/        Texture
+└─ ex_06.5/      Texture and color blending
 ```
