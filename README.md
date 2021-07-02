@@ -5,7 +5,8 @@ Each exercise is added on a separate branch.
 ```
 ├─ deps/         Global dependencies
 │   ├─ freeglut/ Open-source alternative to the OpenGL Utility Toolkit [FreeGLUT](http://freeglut.sourceforge.net/)
-│   └─ glew/     OpenGL Extension Wrangler Library [GLEW](http://glew.sourceforge.net/)
+│   ├─ glew/     OpenGL Extension Wrangler Library [GLEW](http://glew.sourceforge.net/)
+│   └─ glm/      OpenGL Mathematics [GLM](https://github.com/g-truc/glm)
 ├─ ex_01/        Creating OpenGL Window using FreeGLUT
 ├─ ex_02/        Drawing a dot
 ├─ ex_03/        Drawing a triangle
@@ -14,5 +15,6 @@ Each exercise is added on a separate branch.
 ├─ ex_05/        OpenGL Shading Language (GLSL)
 ├─ ex_05.5/      Color interpolation
 ├─ ex_06/        Texture
-└─ ex_06.5/      Texture and color blending
+├─ ex_06.5/      Texture and color blending
+└─ ex_07/        Transformations with GLM
 ```
