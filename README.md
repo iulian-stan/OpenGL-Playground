@@ -16,5 +16,6 @@ Each exercise is added on a separate branch.
 ├─ ex_05.5/      Color interpolation
 ├─ ex_06/        Texture
 ├─ ex_06.5/      Texture and color blending
-└─ ex_07/        Transformations with GLM
+├─ ex_07/        Transformations with GLM
+└─ ex_07.5/      Animated transformation
 ```
