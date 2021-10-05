@@ -27,6 +27,8 @@ static float rz = 0.f; // rotation around Z (roll)
 const float dr = 1.f;  // rotate delta increment
 
 
+static glm::mat4 trans1 = glm::mat4(1.0f);
+
 // DisplayFunction callback
 static void onGlutDisplay()
 {
@@ -43,6 +45,10 @@ static void onGlutDisplay()
   trans = glm::rotate(trans, glm::radians(rx), glm::vec3(1.0, 0.0, 0.0));
   trans = glm::rotate(trans, glm::radians(ry), glm::vec3(0.0, 1.0, 0.0));
   trans = glm::rotate(trans, glm::radians(rz), glm::vec3(0.0, 0.0, 1.0));
+
+  trans1 = trans1 * trans;
+
+  trans = glm::lookAt(glm::vec3(.0, .0, -.1), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0)) * trans1;
 
   // Set value 
   glUniformMatrix4fv(gTrans, 1, GL_FALSE, &trans[0][0]);
@@ -75,6 +81,27 @@ static void onGlutDisplay()
 // Keyboard Function callback
 static void onGlutKey(unsigned char key, int x, int y)
 {
+    //switch (key)
+    //{
+    //case 'w':
+    //    ry += dr; // move forward
+    //    break;
+    //case 's':
+    //    ry -= dr; // move backward
+    //    break;
+    //case 'a':
+    //    rx += dr; // move left
+    //    break;
+    //case 'd':
+    //    rx -= dr; // move right
+    //    break;
+    //case 'q':
+    //    glutLeaveMainLoop(); // quit
+    //    break;
+    //default:
+    //    return;
+    //}
+
     switch (key)
     {
     case 'a':
@@ -101,6 +128,21 @@ static void onGlutKey(unsigned char key, int x, int y)
 
     // Force redisplay
     glutPostRedisplay();
+}
+
+static void onGlutMotion(int x, int y)
+{
+
+}
+
+static void onGlutMouseWheel(int button, int state, int x, int y)
+{
+
+}
+
+static void onGlutMouseEntry(int state)
+{
+
 }
 
 static void AttachShader(GLuint ShaderProgram, GLenum ShaderType, const char* pShaderFile)
@@ -222,6 +264,16 @@ int main(int argc, char** argv)
 
   // Initialize Glut Keyboard callback function
   glutKeyboardFunc(onGlutKey);
+
+  // Initialize Glut Mouse Motion callback function
+  glutMotionFunc(onGlutMotion);
+  glutPassiveMotionFunc(onGlutMotion);
+
+  // Initialize Glut Mouse Wheel callback function
+  glutMouseWheelFunc(onGlutMouseWheel);
+
+  // Initialize Glut Mouse enter/leave callback function
+  glutEntryFunc(onGlutMouseEntry);
 
   // Must be done after glut is initialized!
   GLenum res = glewInit();

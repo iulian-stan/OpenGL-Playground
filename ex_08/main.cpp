@@ -311,8 +311,6 @@ int main(int argc, char** argv)
   }
   stbi_image_free(data);
 
-  glEnable(GL_DEPTH_TEST);
-
   // Create, compile and install shader program
   ShaderProgram();
 
