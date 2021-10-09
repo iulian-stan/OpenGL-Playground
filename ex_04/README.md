@@ -1,5 +1,15 @@
 # Exercise 04: Drawing a rectangle
 
+## Intro
+
+## Summary
+
+## Functions Glossary
+
+## Notes
+
+## Spoiler
+
 ## Takeaways
 
 * GPUs are designed to render triangles, thus other shapes can be seen as a combination of multiple triangles. For example, a rectangle can be represented as 2 right-angled triangles with one common side (hypotenuse). 

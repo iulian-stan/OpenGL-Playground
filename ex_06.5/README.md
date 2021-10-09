@@ -1,5 +1,15 @@
 # Exercise 06.5: Texture and color blending
 
+## Intro
+
+## Summary
+
+## Functions Glossary
+
+## Notes
+
+## Spoiler
+
 ## Takeaways
 
 * In this example both color and texture attributes are passed into the verted shader

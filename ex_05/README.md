@@ -1,5 +1,15 @@
 # Exercise 05: OpenGL Shading Language (GLSL)
 
+## Intro
+
+## Summary
+
+## Functions Glossary
+
+## Notes
+
+## Spoiler
+
 ## Takeaways
 
 * OpenGL Shading Language (GLSL) is a high-level shading language with a syntax based on the C programming language. It gives developers more direct control of the graphics pipeline without having to use ARB assembly language or hardware-specific languages.

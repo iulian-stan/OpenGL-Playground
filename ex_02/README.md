@@ -1,5 +1,15 @@
 # Exercise 02: Drawing a dot
 
+## Intro
+
+## Summary
+
+## Functions Glossary
+
+## Notes
+
+## Spoiler
+
 ## Takeaways
 
 * Initialize GLEW after GLUT is initialized

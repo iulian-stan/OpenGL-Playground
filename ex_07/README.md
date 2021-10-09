@@ -1,5 +1,15 @@
 # Exercise 07: Transformations with GLM
 
+## Intro
+
+## Summary
+
+## Functions Glossary
+
+## Notes
+
+## Spoiler
+
 ## Takeaways
 
 * OpenGL Mathematics (GLM) is a header only C++ mathematics library for graphics software based on the OpenGL Shading Language (GLSL) specifications. It works perfectly with OpenGL but it also ensures interoperability with other third party libraries and SDK. It is a good candidate for software rendering (raytracing / rasterisation), image processing, physics simulations and any development context that requires a simple and convenient mathematics library.

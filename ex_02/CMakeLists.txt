@@ -1,14 +1,13 @@
 cmake_minimum_required(VERSION 3.15)
 
-set(TARGET ex_02)
+project(ex_02 LANGUAGES CXX)
 
-project(${TARGET})
-
-add_executable(${TARGET}
+add_executable(${PROJECT_NAME}
   main.cpp
+  README.md
 )
 
-target_link_libraries(${TARGET}
+target_link_libraries(${PROJECT_NAME}
   PRIVATE
     freeglut
     glew

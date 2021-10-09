@@ -1,5 +1,11 @@
 # Exercise 08: Going 3D (cube)
 
-## Takeaways
+## Intro
 
-* 
+## Summary
+
+## Functions Glossary
+
+## Notes
+
+## Spoiler

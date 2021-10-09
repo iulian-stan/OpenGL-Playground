@@ -1,5 +1,11 @@
 # Exercise 10: Orthogonal projection
 
-## Takeaways
+## Intro
 
-* 
+## Summary
+
+## Functions Glossary
+
+## Notes
+
+## Spoiler

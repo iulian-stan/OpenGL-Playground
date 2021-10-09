@@ -3,6 +3,8 @@
 #include <cstdio>
 #include "utils.h"
 
+const char* TITLE = "Exercise 05: OpenGL Shading Language (GLSL)";
+
 // Vertex Buffer Object handler
 GLuint VBO;
 // Index Buffer Object handler
@@ -151,7 +153,7 @@ int main(int argc, char** argv)
   glutInitWindowPosition(100, 100);
 
   // Create Glut Window
-  glutCreateWindow("Exercise 05: OpenGL Shading Language (GLSL)");
+  glutCreateWindow(TITLE);
 
   // Initialize Glut Display callback function
   glutDisplayFunc(onGlutDisplay);

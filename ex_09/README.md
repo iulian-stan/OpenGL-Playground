@@ -1,5 +1,11 @@
 # Exercise 09: Camera (actor)
 
-## Takeaways
+## Intro
 
-* 
+## Summary
+
+## Functions Glossary
+
+## Notes
+
+## Spoiler

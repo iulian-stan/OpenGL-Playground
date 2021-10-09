@@ -2,6 +2,8 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
+const char* TITLE = "Exercise 02: Drawing a dot";
+
 // Vertex Buffer Object handler
 GLuint VBO;
 
@@ -41,7 +43,7 @@ int main(int argc, char** argv)
   glutInitWindowPosition(100, 100);
 
   // Create Glut Window
-  glutCreateWindow("Exercise 02: Drawing a dot");
+  glutCreateWindow(TITLE);
 
   // Initialize Glut Display callback function
   glutDisplayFunc(onGlutDisplay);

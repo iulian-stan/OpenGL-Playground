@@ -1,5 +1,15 @@
 # Exercise 06: Textures
 
+## Intro
+
+## Summary
+
+## Functions Glossary
+
+## Notes
+
+## Spoiler
+
 ## Takeaways
 
 * Just like VBO and IBO, texture is an object that needs to be created using a corresponding function `glGenTextures` and bound to a texturing target using `glBindTexture `

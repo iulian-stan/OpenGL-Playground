@@ -1,5 +1,15 @@
 # Exercise 01: Creating OpenGL Window using [FreeGLUT](http://freeglut.sourceforge.net/)
 
+## Intro
+
+## Summary
+
+## Functions Glossary
+
+## Notes
+
+## Spoiler
+
 ## Takeaways
 
 * Initialize GLUT using `glutInit` and `glutInit`

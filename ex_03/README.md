@@ -1,5 +1,15 @@
 # Exercise 03: Drawing a triangle
 
+## Intro
+
+## Summary
+
+## Functions Glossary
+
+## Notes
+
+## Spoiler
+
 ## Takeaways
 
 * Define triangle vetices as 3 arrays (1 per corner) each of 3 floats (x, y and z componnets)

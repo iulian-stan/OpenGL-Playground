@@ -1,5 +1,11 @@
 # Exercise 08.5: Depth test
 
-## Takeaways
+## Intro
 
-* 
+## Summary
+
+## Functions Glossary
+
+## Notes
+
+## Spoiler

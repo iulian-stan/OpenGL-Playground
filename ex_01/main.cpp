@@ -1,5 +1,7 @@
 #include <GL/freeglut.h>
 
+const char* TITLE = "Exercise 01: Creating OpenGL Window using FreeGLUT";
+
 // DisplayFunction callback
 static void onGlutDisplay()
 {
@@ -24,7 +26,7 @@ int main(int argc, char** argv)
   glutInitWindowPosition(100, 100);
 
   // Create Glut Window
-  glutCreateWindow("Exercise 01: Creating OpenGL Window using FreeGLUT");
+  glutCreateWindow(TITLE);
 
   // Initialize Glut Display callback function
   glutDisplayFunc(onGlutDisplay);
