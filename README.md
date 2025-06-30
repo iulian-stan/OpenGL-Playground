@@ -1,26 +1,25 @@
-Following "OpenGL for Beginners" tutorial from [OGDEV](https://ogldev.org/).
+# OpenGL Projects (for beginners)
 
-Each exercise is added on a separate branch.
-
+## Structure
 ```
-├─ deps/         Global dependencies
-│   ├─ freeglut/ Open-source alternative to the OpenGL Utility Toolkit [FreeGLUT](http://freeglut.sourceforge.net/)
-│   ├─ glew/     OpenGL Extension Wrangler Library [GLEW](http://glew.sourceforge.net/)
-│   └─ glm/      OpenGL Mathematics [GLM](https://github.com/g-truc/glm)
-├─ ex_01/        Creating OpenGL Window using FreeGLUT
-├─ ex_02/        Drawing a dot
-├─ ex_03/        Drawing a triangle
-├─ ex_04/        Drawing a rectangle
-├─ ex_04.5/      Face Culling
-├─ ex_05/        OpenGL Shading Language (GLSL)
-├─ ex_05.5/      Color interpolation
-├─ ex_06/        Texture
-├─ ex_06.5/      Texture and color blending
-├─ ex_07/        Transformations with GLM
-├─ ex_08/        Going 3D (cube)
-├─ ex_08.5/      Depth test
-├─ ex_09/        Camera
-├─ ex_09.5/      Face culling
-├─ ex_10/        Orthogonal projection
-└─ ex_11/        Perspective projection
+├─ deps/          Global dependencies
+│   ├─ freeglut/  Open-source alternative to the OpenGL Utility Toolkit [FreeGLUT](http://freeglut.sourceforge.net/)
+│   ├─ glew/      OpenGL Extension Wrangler Library [GLEW](http://glew.sourceforge.net/)
+│   └─ glm/       OpenGL Mathematics [GLM](https://github.com/g-truc/glm)
+├─ project01/     Creating OpenGL Window using FreeGLUT
+├─ project02/     Drawing a dot
+├─ project03/     Drawing a triangle
+├─ project04/     Drawing a rectangle
+├─ project04.5/   Face Culling
+├─ project05/     OpenGL Shading Language (GLSL)
+├─ project05.5/   Color interpolation
+├─ project06/     Texture
+├─ project06.5/   Texture and color blending
+├─ project07/     Transformations with GLM
+├─ project08/     Going 3D (cube)
+├─ project08.5/   Depth test
+├─ project09/     Camera
+├─ project09.5/   Face culling
+├─ project10/     Orthogonal projection
+└─ project11/     Perspective projection
 ```
