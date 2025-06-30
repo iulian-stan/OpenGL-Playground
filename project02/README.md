@@ -1,4 +1,4 @@
-# Project02: Drawing a dot
+# Project 02: Drawing a Dot
 
 ## Intro
 

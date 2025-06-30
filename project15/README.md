@@ -1,4 +1,4 @@
-# Project09.5: Face culing
+# Project 15: Perspective Projection
 
 ## Intro
 

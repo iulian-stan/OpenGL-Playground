@@ -1,23 +1,33 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
+#include <glm/mat4x4.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <cstdio>
 #include "utils.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-const char* TITLE = "Exercise 06.5: Texture and color blending";
+const char* TITLE = "Project 14: Orthogonal Projection";
 
 // Vertex Buffer Object handler
 GLuint VBO;
 // Index Buffer Object handler
 GLuint IBO;
+// Uniform variable
+GLuint gTrans;
 
 // Shader program files
 const char* pVSFileName = "shader.vs";
 const char* pFSFileName = "shader.fs";
 
 // Texture image
-const char* pTexFileName = "brickwall.jpg";
+const char* pTexFileName = "box.png";
+
+static float rx = 0.f; // rotation around X (pitch / tilt)
+static float ry = 0.f; // rotation around Y (pan / yaw)
+static float rz = 0.f; // rotation around Z (roll)
+const float dr = 1.f;  // rotate delta increment
+
 
 // DisplayFunction callback
 static void onGlutDisplay()
@@ -26,40 +36,73 @@ static void onGlutDisplay()
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
   // Clear color buffer
-  glClear(GL_COLOR_BUFFER_BIT);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  //Initialize identity matrix
+  glm::mat4 trans = glm::mat4(1.0f);
+
+  // Apply rotation transformation
+  trans = glm::rotate(trans, glm::radians(rx), glm::vec3(1.0, 0.0, 0.0));
+  trans = glm::rotate(trans, glm::radians(ry), glm::vec3(0.0, 1.0, 0.0));
+  trans = glm::rotate(trans, glm::radians(rz), glm::vec3(0.0, 0.0, 1.0));
+
+  // Set value 
+  glUniformMatrix4fv(gTrans, 1, GL_FALSE, &trans[0][0]);
 
   // Enable a generic vertex attribute array (position)
   glEnableVertexAttribArray(0);
 
   // Define an array of generic vertex attribute data (vertex of 3 floats)
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), 0);
-
-  // Enable a generic vertex attribute array (color)
-  glEnableVertexAttribArray(1);
-
-  // Define an array of generic vertex attribute data (RGB - 3 floats)
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
 
   // Enable a generic vertex attribute array (texture)
-  glEnableVertexAttribArray(2);
+  glEnableVertexAttribArray(1);
 
   // Define an array of generic vertex attribute data (texture - 2 floats)
-  glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 
   // Render primitives from array data (vertex reprezenting the dot)
-  glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+  glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
   // Disable a generic vertex attribute array (position)
   glDisableVertexAttribArray(0);
 
-  // Disable a generic vertex attribute array (color)
-  glDisableVertexAttribArray(1);
-
   // Disable a generic vertex attribute array (texture)
-  glDisableVertexAttribArray(2);
+  glDisableVertexAttribArray(1);
 
   // Swap buffers
   glutSwapBuffers();
+}
+
+// Keyboard Function callback
+static void onGlutKey(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case 'a':
+        ry += dr; // Pan clock-wise
+        break;
+    case 'd':
+        ry -= dr; // Pan anti clock-wise
+        break;
+    case 'w':
+        rx += dr; // Tilt clock-wise
+        break;
+    case 's':
+        rx -= dr; // Tilt anti clock-wise
+        break;
+    case 'q':
+        rz += dr; // Roll clock-wise
+        break;
+    case 'e':
+        rz -= dr; // Roll anti clock-wise
+        break;
+    default:
+        return;
+    }
+
+    // Force redisplay
+    glutPostRedisplay();
 }
 
 static void AttachShader(GLuint ShaderProgram, GLenum ShaderType, const char* pShaderFile)
@@ -139,6 +182,13 @@ static void ShaderProgram()
     exit(1);
   }
 
+  gTrans = glGetUniformLocation(ShaderProgram, "gTransform");
+  if (gTrans == -1)
+  {
+    fprintf(stderr, "Error getting uniform location of 'gTransform'\n");
+    exit(1);
+  }
+
   // Validate program object
   glValidateProgram(ShaderProgram);
 
@@ -172,6 +222,9 @@ int main(int argc, char** argv)
   // Initialize Glut Display callback function
   glutDisplayFunc(onGlutDisplay);
 
+  // Initialize Glut Keyboard callback function
+  glutKeyboardFunc(onGlutKey);
+
   // Must be done after glut is initialized!
   GLenum res = glewInit();
   if (res != GLEW_OK)
@@ -181,28 +234,38 @@ int main(int argc, char** argv)
   }
 
   // Rectangle corners coordinates
-  float vertices[4][8] =
-  {
-    {
-      -0.5f, -0.5f, 0.0f,  // bottom left corner of the window (x = -0.5, y = -0.5)
-       0.0f,  1.0f, 0.0f,  // RGB (Red-1, Green-0, Blue-0)
-      -1.0f, -1.0f         // Texture bottom left
-    },
-    {
-       0.5f, -0.5f, 0.0f,  // bottom right corner of the window (x = 0.5, y = -0.5)
-       1.0f,  0.0f, 0.0f,  // RGB (Red-1, Green-0, Blue-0)
-       1.0f, -1.0f         // Texture bottom right
-    },
-    {
-       0.5f,  0.5f, 0.0f,  // top right corner of the window (x = 0.5, y = 0.5)
-       1.0f,  0.0f, 1.0f,  // RGB (Red-1, Green-0, Blue-0)
-       1.0f,  1.0f         // Texture top right
-    },
-    {
-      -0.5f,  0.5f, 0.0f,  // top left corner of the window (x = -0.5, y = 0.5)
-       1.0f,  0.0f, 0.0f,  // RGB (Red-1, Green-0, Blue-0)
-      -1.0f,  1.0f         // Texture top left
-    }
+  float vertices[24][5] =
+  {  
+    // Left Side
+    { -0.5f, -0.5f,  0.5f,  0.0f,  0.0f },
+    { -0.5f, -0.5f, -0.5f,  1.0f,  0.0f },
+    { -0.5f,  0.5f, -0.5f,  1.0f,  1.0f },
+    { -0.5f,  0.5f,  0.5f,  0.0f,  1.0f },
+    // Front Side
+    { -0.5f, -0.5f, -0.5f,  0.0f,  0.0f },
+    {  0.5f, -0.5f, -0.5f,  1.0f,  0.0f },
+    {  0.5f,  0.5f, -0.5f,  1.0f,  1.0f },
+    { -0.5f,  0.5f, -0.5f,  0.0f,  1.0f },
+    // Right Side
+    {  0.5f, -0.5f, -0.5f,  0.0f,  0.0f },
+    {  0.5f, -0.5f,  0.5f,  1.0f,  0.0f },
+    {  0.5f,  0.5f,  0.5f,  1.0f,  1.0f },
+    {  0.5f,  0.5f, -0.5f,  0.0f,  1.0f },
+    // Back Side
+    {  0.5f, -0.5f,  0.5f,  0.0f,  0.0f },
+    { -0.5f, -0.5f,  0.5f,  1.0f,  0.0f },
+    { -0.5f,  0.5f,  0.5f,  1.0f,  1.0f },
+    {  0.5f,  0.5f,  0.5f,  0.0f,  1.0f },
+    // Top Side
+    { -0.5f,  0.5f, -0.5f,  0.0f,  0.0f },
+    {  0.5f,  0.5f, -0.5f,  1.0f,  0.0f },
+    {  0.5f,  0.5f,  0.5f,  1.0f,  1.0f },
+    { -0.5f,  0.5f,  0.5f,  0.0f,  1.0f },
+    // Bottom Side
+    { -0.5f, -0.5f,  0.5f,  0.0f,  0.0f },
+    {  0.5f, -0.5f,  0.5f,  1.0f,  0.0f },
+    {  0.5f, -0.5f, -0.5f,  1.0f,  1.0f },
+    { -0.5f, -0.5f, -0.5f,  0.0f,  1.0f }
   };
 
   // Create vertex buffer
@@ -211,10 +274,14 @@ int main(int argc, char** argv)
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
   // Square is actually drawn as a combination of two triangles
-  unsigned int indices[] =
-  {
-    0, 1, 2, // first triangle (corners: bottom left, bottom right, top right)
-    0, 3, 2  // second triangle (corners: bottom left, top left, top right)
+  unsigned int indices[36] =
+  { 
+     0,  1,  3,  1,  2,  3,
+     4,  5,  7,  5,  6,  7,
+     8,  9, 11,  9, 10, 11,
+    12, 13, 15, 13, 14, 15,
+    16, 17, 19, 17, 18, 19,
+    20, 21, 23, 21, 22, 23
   };
 
   // Create index buffer
@@ -236,7 +303,7 @@ int main(int argc, char** argv)
   unsigned char *data = stbi_load(pTexFileName, &width, &height, &nrChannels, 0);
   if (data)
   {
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
   }
   else
@@ -245,6 +312,12 @@ int main(int argc, char** argv)
     exit(1);
   }
   stbi_image_free(data);
+
+  //glEnable(GL_DEPTH_TEST);
+
+  glEnable(GL_CULL_FACE);
+  glCullFace(GL_BACK);
+  glFrontFace(GL_CCW);
 
   // Create, compile and install shader program
   ShaderProgram();

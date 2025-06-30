@@ -1,4 +1,4 @@
-# Project03: Drawing a triangle
+# Project 03: Drawing a Triangle
 
 ## Intro
 

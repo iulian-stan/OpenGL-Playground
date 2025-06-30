@@ -3,7 +3,7 @@
 #include <cstdio>
 #include "utils.h"
 
-const char* TITLE = "Exercise 05: OpenGL Shading Language (GLSL)";
+const char* TITLE = "Project 05: OpenGL Shading Language (GLSL)";
 
 // Vertex Buffer Object handler
 GLuint VBO;

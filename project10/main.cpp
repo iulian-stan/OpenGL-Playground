@@ -7,7 +7,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-const char* TITLE = "Exercise 10: Orthogonal projection";
+const char* TITLE = "Project 10: Going 3D (cube)";
 
 // Vertex Buffer Object handler
 GLuint VBO;
@@ -312,12 +312,6 @@ int main(int argc, char** argv)
     exit(1);
   }
   stbi_image_free(data);
-
-  //glEnable(GL_DEPTH_TEST);
-
-  glEnable(GL_CULL_FACE);
-  glCullFace(GL_BACK);
-  glFrontFace(GL_CCW);
 
   // Create, compile and install shader program
   ShaderProgram();

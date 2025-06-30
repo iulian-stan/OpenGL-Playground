@@ -1,4 +1,4 @@
-# Project08.5: Depth test
+# Project 14: Orthogonal Projection
 
 ## Intro
 

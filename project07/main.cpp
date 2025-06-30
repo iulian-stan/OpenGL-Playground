@@ -1,20 +1,16 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
-#include <glm/mat4x4.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include <cstdio>
 #include "utils.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-const char* TITLE = "Exercise 07: Transformations with GLM";
+const char* TITLE = "Project 07: Textures";
 
 // Vertex Buffer Object handler
 GLuint VBO;
 // Index Buffer Object handler
 GLuint IBO;
-// Uniform variable
-GLuint gTrans;
 
 // Shader program files
 const char* pVSFileName = "shader.vs";
@@ -23,16 +19,7 @@ const char* pFSFileName = "shader.fs";
 // Texture image
 const char* pTexFileName = "brickwall.jpg";
 
-static float dx = 0.f; // translation on X azis
-static float dy = 0.f; // translation on Y axis
-const float dt = 0.05; // translation delta increment
-static float sx = 1.f; // scale factor on X axis
-static float sy = 1.f; // scale factor on Y axis
-const float ds = 0.1;  // scale delta increment
-static float rz = 0.f; // rotation around Z
-const float dr = 1.f;    // rotate delta increment
-
-// Display Function callback
+// DisplayFunction callback
 static void onGlutDisplay()
 {
   // Set color buffer clear values (RBA)
@@ -40,21 +27,6 @@ static void onGlutDisplay()
 
   // Clear color buffer
   glClear(GL_COLOR_BUFFER_BIT);
-
-  //Initialize identity matrix
-  glm::mat4 trans = glm::mat4(1.0f);
-
-  // Apply translation transformation
-  trans = glm::translate(trans, glm::vec3(dx, dy, 0.0f));
-
-  // Apply scaling transformation
-  trans = glm::scale(trans, glm::vec3(sx, sy, 1));
-
-  // Apply rotation transformation
-  trans = glm::rotate(trans, glm::radians(rz), glm::vec3(0.0, 0.0, 1.0));
-
-  // Set value 
-  glUniformMatrix4fv(gTrans, 1, GL_FALSE, &trans[0][0]);
 
   // Enable a generic vertex attribute array (position)
   glEnableVertexAttribArray(0);
@@ -79,49 +51,6 @@ static void onGlutDisplay()
 
   // Swap buffers
   glutSwapBuffers();
-}
-
-// Keyboard Function callback
-static void onGlutKey(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-        case 'w':
-            dy += dt; // move up
-            break;
-        case 's':
-            dy -= dt; // move down
-            break;
-        case 'd':
-            dx += dt; // move right
-            break;
-        case 'a':
-            dx -= dt; // move left
-            break;
-        case 'q':
-            sx += ds; // upscale on horizontal
-            break;
-        case 'Q':
-            sx -= ds; // downscale on horizontal
-            break;
-        case 'e':
-            sy += ds; // upscale on vertical
-            break;
-        case 'E':
-            sy -= ds; // downscale on vertical
-            break;
-        case 'r':
-            rz += dr; // rotate clock-wise
-            break;
-        case 'R':
-            rz -= dr; // rotate anti clock-wise
-            break;
-        default:
-            return;
-    }
-
-    // Force redisplay
-    glutPostRedisplay();
 }
 
 static void AttachShader(GLuint ShaderProgram, GLenum ShaderType, const char* pShaderFile)
@@ -201,13 +130,6 @@ static void ShaderProgram()
     exit(1);
   }
 
-  gTrans = glGetUniformLocation(ShaderProgram, "gTransform");
-  if (gTrans == -1)
-  {
-    fprintf(stderr, "Error getting uniform location of 'gTransform'\n");
-    exit(1);
-  }
-
   // Validate program object
   glValidateProgram(ShaderProgram);
 
@@ -240,9 +162,6 @@ int main(int argc, char** argv)
 
   // Initialize Glut Display callback function
   glutDisplayFunc(onGlutDisplay);
-
-  // Initialize Glut Keyboard callback function
-  glutKeyboardFunc(onGlutKey);
 
   // Must be done after glut is initialized!
   GLenum res = glewInit();
@@ -280,7 +199,7 @@ int main(int argc, char** argv)
 
   // Square is actually drawn as a combination of two triangles
   unsigned int indices[] =
-  { 
+  {
     0, 1, 2, // first triangle (corners: bottom left, bottom right, top right)
     0, 3, 2  // second triangle (corners: bottom left, top left, top right)
   };

@@ -1,4 +1,4 @@
-# Project04: Drawing a rectangle
+# Project 04: Drawing a Rectangle
 
 ## Intro
 

@@ -7,7 +7,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-const char* TITLE = "Exercise 08.5: Depth test";
+const char* TITLE = "Project 15: Perspective Projection";
 
 // Vertex Buffer Object handler
 GLuint VBO;
@@ -313,7 +313,11 @@ int main(int argc, char** argv)
   }
   stbi_image_free(data);
 
-  glEnable(GL_DEPTH_TEST);
+  //glEnable(GL_DEPTH_TEST);
+
+  glEnable(GL_CULL_FACE);
+  glCullFace(GL_BACK);
+  glFrontFace(GL_CCW);
 
   // Create, compile and install shader program
   ShaderProgram();

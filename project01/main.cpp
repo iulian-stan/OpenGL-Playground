@@ -1,6 +1,6 @@
 #include <GL/freeglut.h>
 
-const char* TITLE = "Exercise 01: Creating OpenGL Window using FreeGLUT";
+const char* TITLE = "Project 01: Creating OpenGL Window using FreeGLUT";
 
 // DisplayFunction callback
 static void onGlutDisplay()

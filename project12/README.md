@@ -1,4 +1,4 @@
-# Project 10: Going 3D (cube)
+# Project 12: Camera (actor)
 
 ## Intro
 

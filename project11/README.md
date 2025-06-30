@@ -1,4 +1,4 @@
-# Project10: Perspective projection
+# Project 11: Depth Test
 
 ## Intro
 

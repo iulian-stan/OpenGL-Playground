@@ -1,4 +1,4 @@
-# Project05: OpenGL Shading Language (GLSL)
+# Project 05: OpenGL Shading Language (GLSL)
 
 ## Intro
 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(project08_5 LANGUAGES CXX)
+project(project12 LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   stb_image.h

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(project06_5 LANGUAGES CXX)
+project(project15 LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   stb_image.h
@@ -23,6 +23,6 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy
     ${CMAKE_CURRENT_SOURCE_DIR}/shader.fs
     ${CMAKE_CURRENT_SOURCE_DIR}/shader.vs
-    ${CMAKE_CURRENT_SOURCE_DIR}/brickwall.jpg
+    ${CMAKE_CURRENT_SOURCE_DIR}/box.png
     ${CMAKE_CURRENT_BINARY_DIR}
 )

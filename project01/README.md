@@ -1,4 +1,4 @@
-# Project01: Creating OpenGL Window using [FreeGLUT](http://freeglut.sourceforge.net/)
+# Project 01: Creating OpenGL Window using [FreeGLUT](http://freeglut.sourceforge.net/)
 
 ## Intro
 
@@ -26,7 +26,7 @@ glutInitWindowPosition(100, 100);
 
 * Create Window using `glutCreateWindow`
 ```
-glutCreateWindow("Exercise 01");
+glutCreateWindow("Project 01: Creating OpenGL Window using FreeGLUT");
 ```
 
 * Initialize display callback function using `glutDisplayFunc`

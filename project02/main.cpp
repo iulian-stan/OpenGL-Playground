@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
-const char* TITLE = "Exercise 02: Drawing a dot";
+const char* TITLE = "Project 02: Drawing a Dot";
 
 // Vertex Buffer Object handler
 GLuint VBO;
