@@ -17,8 +17,8 @@ GLuint IBO;
 GLuint gTrans;
 
 // Shader program files
-const char* pVSFileName = "shader.vs";
-const char* pFSFileName = "shader.fs";
+const char* pVSFileName = "shader13.vs";
+const char* pFSFileName = "shader13.fs";
 
 // Texture image
 const char* pTexFileName = "box.png";

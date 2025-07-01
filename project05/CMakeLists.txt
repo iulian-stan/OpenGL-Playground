@@ -6,8 +6,8 @@ add_executable(${PROJECT_NAME}
   utils.h
   utils.cpp
   main.cpp
-  shader.fs
-  shader.vs
+  shader05.fs
+  shader05.vs
   README.md
 )
 
@@ -19,7 +19,7 @@ target_link_libraries(${PROJECT_NAME}
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy
-    ${CMAKE_CURRENT_SOURCE_DIR}/shader.fs
-    ${CMAKE_CURRENT_SOURCE_DIR}/shader.vs
-    ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/shader05.fs
+    ${CMAKE_CURRENT_SOURCE_DIR}/shader05.vs
+    $<TARGET_FILE_DIR:${PROJECT_NAME}>
 )

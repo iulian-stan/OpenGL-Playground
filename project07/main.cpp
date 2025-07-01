@@ -13,8 +13,8 @@ GLuint VBO;
 GLuint IBO;
 
 // Shader program files
-const char* pVSFileName = "shader.vs";
-const char* pFSFileName = "shader.fs";
+const char* pVSFileName = "shader07.vs";
+const char* pFSFileName = "shader07.fs";
 
 // Texture image
 const char* pTexFileName = "brickwall.jpg";

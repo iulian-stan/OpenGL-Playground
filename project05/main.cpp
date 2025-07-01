@@ -11,8 +11,8 @@ GLuint VBO;
 GLuint IBO;
 
 // Shader program files
-const char* pVSFileName = "shader.vs";
-const char* pFSFileName = "shader.fs";
+const char* pVSFileName = "shader05.vs";
+const char* pFSFileName = "shader05.fs";
 
 // DisplayFunction callback
 static void onGlutDisplay()
