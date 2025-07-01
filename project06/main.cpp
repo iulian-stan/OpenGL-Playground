@@ -3,6 +3,8 @@
 #include <cstdio>
 #include "utils.h"
 
+const char* TITLE = "Project 06: Color Interpolation";
+
 // Vertex Buffer Object handler
 GLuint VBO;
 // Index Buffer Object handler
@@ -151,7 +153,7 @@ int main(int argc, char** argv)
   glutInitWindowPosition(100, 100);
 
   // Create Glut Window
-  glutCreateWindow("Project 06: OpenGL Shading Language (GLSL)");
+  glutCreateWindow(TITLE);
 
   // Initialize Glut Display callback function
   glutDisplayFunc(onGlutDisplay);
@@ -173,7 +175,7 @@ int main(int argc, char** argv)
     },
     {
        0.5f, -0.5f, 0.0f,  // bottom right corner of the window (x = 0.5, y = -0.5)
-       1.0f,  0.0f, 0.0f   // RGB (Red-1, Green-0, Blue-0)
+       0.0f,  1.0f, 0.0f   // RGB (Red-0, Green-1, Blue-0)
     },
     {
        0.5f,  0.5f, 0.0f,  // top right corner of the window (x = 0.5, y = 0.5)
@@ -181,7 +183,7 @@ int main(int argc, char** argv)
     },
     {
       -0.5f,  0.5f, 0.0f,  // top left corner of the window (x = -0.5, y = 0.5)
-       1.0f,  0.0f, 0.0f   // RGB (Red-1, Green-0, Blue-0)
+       0.0f,  0.0f, 1.0f   // RGB (Red-0, Green-0, Blue-1)
     }
   };
 

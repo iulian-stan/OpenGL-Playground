@@ -1,7 +1,6 @@
-Following "OpenGL for Beginners" tutorial from [OGDEV](https://ogldev.org/).
+# OpenGL Projects (for beginners)
 
-Each exercise is added on a separate branch.
-
+## Structure
 ```
 ├─ dependencies/  3rd party dependencies
 │   ├─ freeglut/  Open-source alternative to the OpenGL Utility Toolkit [FreeGLUT](http://freeglut.sourceforge.net/)
@@ -11,11 +10,15 @@ Each exercise is added on a separate branch.
 ├─ project02/     Drawing a Dot
 ├─ project03/     Drawing a Triangle
 ├─ project04/     Drawing a Rectangle
-├─ project05/     Face Culling
-├─ project06/     OpenGL Shading Language (GLSL)
-├─ project07/     Color Interpolation
-├─ project08/     Texture
-├─ project09/     Texture and Color Blending
-├─ project10/     Transformations with GLM
-└─ project11/     Animated transformation
+├─ project05/     OpenGL Shading Language (GLSL)
+├─ project06/     Color Interpolation
+├─ project07/     Texture
+├─ project08/     Texture and Color Blending
+├─ project09/     Transformations with GLM
+├─ project10/     Going 3D (cube)
+├─ project11/     Depth Test
+├─ project12/     Camera
+├─ project13/     Face Culling
+├─ project14/     Orthogonal Projection
+└─ project15/     Perspective Projection
 ```

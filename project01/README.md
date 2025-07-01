@@ -16,7 +16,7 @@ glutInitWindowPosition(100, 100);
 
 * Create Window using `glutCreateWindow`
 ```
-glutCreateWindow("Project 01: ");
+glutCreateWindow("Project 01: Creating OpenGL Window using FreeGLUT");
 ```
 
 * Initialize display callback function using `glutDisplayFunc`

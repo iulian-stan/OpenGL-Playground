@@ -5,6 +5,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+const char* TITLE = "Project 08: Texture and Color Blending";
+
 // Vertex Buffer Object handler
 GLuint VBO;
 // Index Buffer Object handler
@@ -30,13 +32,19 @@ static void onGlutDisplay()
   glEnableVertexAttribArray(0);
 
   // Define an array of generic vertex attribute data (vertex of 3 floats)
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), 0);
 
-  // Enable a generic vertex attribute array (texture)
+  // Enable a generic vertex attribute array (color)
   glEnableVertexAttribArray(1);
 
+  // Define an array of generic vertex attribute data (RGB - 3 floats)
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+
+  // Enable a generic vertex attribute array (texture)
+  glEnableVertexAttribArray(2);
+
   // Define an array of generic vertex attribute data (texture - 2 floats)
-  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+  glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 
   // Render primitives from array data (vertex reprezenting the dot)
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -44,8 +52,11 @@ static void onGlutDisplay()
   // Disable a generic vertex attribute array (position)
   glDisableVertexAttribArray(0);
 
-  // Disable a generic vertex attribute array (texture)
+  // Disable a generic vertex attribute array (color)
   glDisableVertexAttribArray(1);
+
+  // Disable a generic vertex attribute array (texture)
+  glDisableVertexAttribArray(2);
 
   // Swap buffers
   glutSwapBuffers();
@@ -156,7 +167,7 @@ int main(int argc, char** argv)
   glutInitWindowPosition(100, 100);
 
   // Create Glut Window
-  glutCreateWindow("Project 08: Texture");
+  glutCreateWindow(TITLE);
 
   // Initialize Glut Display callback function
   glutDisplayFunc(onGlutDisplay);
@@ -170,22 +181,26 @@ int main(int argc, char** argv)
   }
 
   // Rectangle corners coordinates
-  float vertices[4][5] =
+  float vertices[4][8] =
   {
     {
       -0.5f, -0.5f, 0.0f,  // bottom left corner of the window (x = -0.5, y = -0.5)
+       0.0f,  1.0f, 0.0f,  // RGB (Red-1, Green-0, Blue-0)
       -1.0f, -1.0f         // Texture bottom left
     },
     {
        0.5f, -0.5f, 0.0f,  // bottom right corner of the window (x = 0.5, y = -0.5)
+       1.0f,  0.0f, 0.0f,  // RGB (Red-1, Green-0, Blue-0)
        1.0f, -1.0f         // Texture bottom right
     },
     {
        0.5f,  0.5f, 0.0f,  // top right corner of the window (x = 0.5, y = 0.5)
+       1.0f,  0.0f, 1.0f,  // RGB (Red-1, Green-0, Blue-0)
        1.0f,  1.0f         // Texture top right
     },
     {
       -0.5f,  0.5f, 0.0f,  // top left corner of the window (x = -0.5, y = 0.5)
+       1.0f,  0.0f, 0.0f,  // RGB (Red-1, Green-0, Blue-0)
       -1.0f,  1.0f         // Texture top left
     }
   };

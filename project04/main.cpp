@@ -2,6 +2,8 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
+const char* TITLE = "Project 04: Drawing a Rectangle";
+
 // Vertex Buffer Object handler
 GLuint VBO;
 // Index Buffer Object handler
@@ -43,7 +45,7 @@ int main(int argc, char** argv)
   glutInitWindowPosition(100, 100);
 
   // Create Glut Window
-  glutCreateWindow("Project 04: Drawing a Rectangle");
+  glutCreateWindow(TITLE);
 
   // Initialize Glut Display callback function
   glutDisplayFunc(onGlutDisplay);

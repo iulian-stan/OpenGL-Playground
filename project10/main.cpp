@@ -7,6 +7,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+const char* TITLE = "Project 10: Going 3D (cube)";
+
 // Vertex Buffer Object handler
 GLuint VBO;
 // Index Buffer Object handler
@@ -19,7 +21,13 @@ const char* pVSFileName = "shader.vs";
 const char* pFSFileName = "shader.fs";
 
 // Texture image
-const char* pTexFileName = "brickwall.jpg";
+const char* pTexFileName = "box.png";
+
+static float rx = 0.f; // rotation around X (pitch / tilt)
+static float ry = 0.f; // rotation around Y (pan / yaw)
+static float rz = 0.f; // rotation around Z (roll)
+const float dr = 1.f;  // rotate delta increment
+
 
 // DisplayFunction callback
 static void onGlutDisplay()
@@ -28,16 +36,15 @@ static void onGlutDisplay()
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
   // Clear color buffer
-  glClear(GL_COLOR_BUFFER_BIT);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   //Initialize identity matrix
   glm::mat4 trans = glm::mat4(1.0f);
-  // Apply translation transformation
-  trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
-  // Apply scaling transformation
-  trans = glm::scale(trans, glm::vec3(0.5, 0.5, 1));
+
   // Apply rotation transformation
-  trans = glm::rotate(trans, glm::radians(45), glm::vec3(0.0, 0.0, 1.0));
+  trans = glm::rotate(trans, glm::radians(rx), glm::vec3(1.0, 0.0, 0.0));
+  trans = glm::rotate(trans, glm::radians(ry), glm::vec3(0.0, 1.0, 0.0));
+  trans = glm::rotate(trans, glm::radians(rz), glm::vec3(0.0, 0.0, 1.0));
 
   // Set value 
   glUniformMatrix4fv(gTrans, 1, GL_FALSE, &trans[0][0]);
@@ -55,7 +62,7 @@ static void onGlutDisplay()
   glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 
   // Render primitives from array data (vertex reprezenting the dot)
-  glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+  glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
   // Disable a generic vertex attribute array (position)
   glDisableVertexAttribArray(0);
@@ -65,6 +72,37 @@ static void onGlutDisplay()
 
   // Swap buffers
   glutSwapBuffers();
+}
+
+// Keyboard Function callback
+static void onGlutKey(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case 'a':
+        ry += dr; // Pan clock-wise
+        break;
+    case 'd':
+        ry -= dr; // Pan anti clock-wise
+        break;
+    case 'w':
+        rx += dr; // Tilt clock-wise
+        break;
+    case 's':
+        rx -= dr; // Tilt anti clock-wise
+        break;
+    case 'q':
+        rz += dr; // Roll clock-wise
+        break;
+    case 'e':
+        rz -= dr; // Roll anti clock-wise
+        break;
+    default:
+        return;
+    }
+
+    // Force redisplay
+    glutPostRedisplay();
 }
 
 static void AttachShader(GLuint ShaderProgram, GLenum ShaderType, const char* pShaderFile)
@@ -179,10 +217,13 @@ int main(int argc, char** argv)
   glutInitWindowPosition(100, 100);
 
   // Create Glut Window
-  glutCreateWindow("Project 10: Transformations with GLM");
+  glutCreateWindow(TITLE);
 
   // Initialize Glut Display callback function
   glutDisplayFunc(onGlutDisplay);
+
+  // Initialize Glut Keyboard callback function
+  glutKeyboardFunc(onGlutKey);
 
   // Must be done after glut is initialized!
   GLenum res = glewInit();
@@ -193,24 +234,38 @@ int main(int argc, char** argv)
   }
 
   // Rectangle corners coordinates
-  float vertices[4][5] =
-  {
-    {
-      -0.5f, -0.5f, 0.0f,  // bottom left corner of the window (x = -0.5, y = -0.5)
-      -1.0f, -1.0f         // Texture bottom left
-    },
-    {
-       0.5f, -0.5f, 0.0f,  // bottom right corner of the window (x = 0.5, y = -0.5)
-       1.0f, -1.0f         // Texture bottom right
-    },
-    {
-       0.5f,  0.5f, 0.0f,  // top right corner of the window (x = 0.5, y = 0.5)
-       1.0f,  1.0f         // Texture top right
-    },
-    {
-      -0.5f,  0.5f, 0.0f,  // top left corner of the window (x = -0.5, y = 0.5)
-      -1.0f,  1.0f         // Texture top left
-    }
+  float vertices[24][5] =
+  {  
+    // Left Side
+    { -0.5f, -0.5f,  0.5f,  0.0f,  0.0f },
+    { -0.5f, -0.5f, -0.5f,  1.0f,  0.0f },
+    { -0.5f,  0.5f, -0.5f,  1.0f,  1.0f },
+    { -0.5f,  0.5f,  0.5f,  0.0f,  1.0f },
+    // Front Side
+    { -0.5f, -0.5f, -0.5f,  0.0f,  0.0f },
+    {  0.5f, -0.5f, -0.5f,  1.0f,  0.0f },
+    {  0.5f,  0.5f, -0.5f,  1.0f,  1.0f },
+    { -0.5f,  0.5f, -0.5f,  0.0f,  1.0f },
+    // Right Side
+    {  0.5f, -0.5f, -0.5f,  0.0f,  0.0f },
+    {  0.5f, -0.5f,  0.5f,  1.0f,  0.0f },
+    {  0.5f,  0.5f,  0.5f,  1.0f,  1.0f },
+    {  0.5f,  0.5f, -0.5f,  0.0f,  1.0f },
+    // Back Side
+    {  0.5f, -0.5f,  0.5f,  0.0f,  0.0f },
+    { -0.5f, -0.5f,  0.5f,  1.0f,  0.0f },
+    { -0.5f,  0.5f,  0.5f,  1.0f,  1.0f },
+    {  0.5f,  0.5f,  0.5f,  0.0f,  1.0f },
+    // Top Side
+    { -0.5f,  0.5f, -0.5f,  0.0f,  0.0f },
+    {  0.5f,  0.5f, -0.5f,  1.0f,  0.0f },
+    {  0.5f,  0.5f,  0.5f,  1.0f,  1.0f },
+    { -0.5f,  0.5f,  0.5f,  0.0f,  1.0f },
+    // Bottom Side
+    { -0.5f, -0.5f,  0.5f,  0.0f,  0.0f },
+    {  0.5f, -0.5f,  0.5f,  1.0f,  0.0f },
+    {  0.5f, -0.5f, -0.5f,  1.0f,  1.0f },
+    { -0.5f, -0.5f, -0.5f,  0.0f,  1.0f }
   };
 
   // Create vertex buffer
@@ -219,10 +274,14 @@ int main(int argc, char** argv)
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
   // Square is actually drawn as a combination of two triangles
-  unsigned int indices[] =
+  unsigned int indices[36] =
   { 
-    0, 1, 2, // first triangle (corners: bottom left, bottom right, top right)
-    0, 3, 2  // second triangle (corners: bottom left, top left, top right)
+     0,  1,  3,  1,  2,  3,
+     4,  5,  7,  5,  6,  7,
+     8,  9, 11,  9, 10, 11,
+    12, 13, 15, 13, 14, 15,
+    16, 17, 19, 17, 18, 19,
+    20, 21, 23, 21, 22, 23
   };
 
   // Create index buffer
@@ -244,7 +303,7 @@ int main(int argc, char** argv)
   unsigned char *data = stbi_load(pTexFileName, &width, &height, &nrChannels, 0);
   if (data)
   {
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
   }
   else
