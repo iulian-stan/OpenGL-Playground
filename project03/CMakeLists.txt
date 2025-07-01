@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.15)
+
+project(project03 LANGUAGES CXX)
+
+add_executable(${PROJECT_NAME}
+  main.cpp
+)
+
+target_link_libraries(${PROJECT_NAME}
+  PRIVATE
+    freeglut
+    glew
+    glm
+)
